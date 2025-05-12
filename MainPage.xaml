@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="taskManager.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <Label Text="TASK MANAGER" TextColor="Black" FontSize="30" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+            <Label x:Name="pointsLbl" Text="Zdobyte punkty: 0" HorizontalTextAlignment="Center" Margin="20" FontSize="20"/>
+            <VerticalStackLayout Margin="10" Spacing="20">
+                <Entry WidthRequest="200" FontSize="20" x:Name="taskNameEntry"/>
+                <DatePicker 
+                    FontSize="20" 
+                    x:Name="taskDateTimePicker" 
+                    MinimumDate="09/05/2025"
+                    Date="09/05/2025"/>
+                <FlexLayout Direction="Row" JustifyContent="SpaceAround" AlignItems="Center" > 
+                    <Stepper
+                        Minimum="1"
+                        Value="1"
+                        ValueChanged="Stepper_ValueChanged"
+                        x:Name="pointsStepper"
+                    />
+                <Label x:Name="stepperValueLbl" Text="Aktualnie punktów: 1" FontSize="15" FontAttributes="Bold"/>
+                </FlexLayout>
+                <Button Text="Dodaj zadanie"  FontAttributes="Bold" FontSize="20" Clicked="Add_Task"/>
+                <Button Text="Zakończ zadanie" Background="Chartreuse" FontAttributes="Bold" FontSize="20" Clicked="End_Task"/>
+
+                <Button Text="Usuń zadanie" FontSize="20" FontAttributes="Bold" Clicked="Delete_Task"  Background="Red" TextColor="White"/>
+            </VerticalStackLayout>
+            <CollectionView x:Name="Zadania" SelectionMode="Single" SelectionChanged="Zadania_SelectionChanged">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10" Spacing="5">
+                            <Label Text="{Binding tytul}" FontAttributes="Bold" FontSize="18" />
+                            <Label Text="{Binding termin, StringFormat='Term: {0:dd.MM.yyyy}'}" FontSize="14" TextColor="Gray" />
+                            <Label Text="{Binding punkty}" FontSize="16" TextColor="Black"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
